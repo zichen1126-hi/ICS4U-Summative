@@ -14,7 +14,7 @@ public class ProcessingExample {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MySketch.main("processingexample.MySketch");
+        MySketch.main("ics4u_summative.MySketch");
     }
     
 }
