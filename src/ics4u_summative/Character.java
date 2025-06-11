@@ -9,32 +9,45 @@ import processing.core.PImage;
  *
  * @author student
  */
-public class Person {
+public class Character {
     public int x, y;
-    private String name;
-    private int age;
     private PApplet app;
     private PImage image;
-    public Person(PApplet p, int x, int y, String name, int age, String imagePath){
-        app = p;
+    private String name;
+    private final String DEFAULTNAME = "Name";
+    private int age;
+    private final int DEFAULTAGE = 0;
+    public Character(PApplet p, int x, int y, String name, int age, String imagePath){
+        this.app = p;
         this.x = x;
         this.y = y;
         this.name = name;
         this.age = age;
         this.image = app.loadImage(imagePath);
     }
-    public void move(int dx, int dy){
-        x += dx;
-        y += dy;
+    public Character(PApplet p){
+        this.app = p;
+        this.x = 0;
+        this.y = 0;
+        this.name = DEFAULTNAME;
+        this.age = DEFAULTAGE;
     }
-    public void moveTo(int dx, int dy){
-        x = dx;
-        y = dy;
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public int getAge(){
+        return age;
+    }
+    public void setAge(int age){
+        this.age = age;
     }
     public void draw(){
         app.image(image, x, y);
     }
-    public boolean isCollidingWith(Person other){
+    public boolean isCollidingWith(Character other){
         int centerX = x + (image.pixelWidth / 2);
         int centerY = y + (image.pixelHeight / 2);
         int otherCenterX = other.x + (image.pixelWidth / 2);
@@ -42,15 +55,8 @@ public class Person {
         float d = PApplet.dist(otherCenterX, otherCenterY, centerX, centerY);
         return d < 32;
     }
-    public boolean isClicked(int mouseX, int mouseY){
-        int centerX = x + (image.pixelWidth / 2);
-        int centerY = y + (image.pixelHeight / 2);
-        float d = PApplet.dist(mouseX, mouseY, centerX, centerY);
-        return d < 16;
-    }
-    public void displayInfo(PApplet p){
-        app.fill(0);
-        app.text("Name: " + name, x, y - 50);
-        app.text("Age: " + age, x, y - 30);
+    public void move(int dx, int dy){
+        x += dx;
+        y += dy;
     }
 }

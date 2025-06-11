@@ -9,7 +9,7 @@ import processing.core.PApplet;
  * @author student
  */
 public class MySketch extends PApplet{
-    private Person person1;
+    private Character person1;
     private boolean showInfo;
     private String userInput = "";
     private int stage = 1;
@@ -19,22 +19,28 @@ public class MySketch extends PApplet{
     public void setup(){
         background(100,100,100);
         textSize(20);
-        person1 = new Person(this, 100, 200, "Mr Loo", 99, "images/person.png");
+        person1 = new Character(this, 100, 200, "Mr Loo", 99, "images/person.png");
     }
     public void draw(){
         background(100);
+        if (keyPressed){
+            switch (keyCode) {
+                case LEFT:
+                    person1.move(-5, 0);
+                    break;
+                case RIGHT:
+                    person1.move(5, 0);
+                    break;
+                case UP:
+                    person1.move(0, -5);
+                    break;
+                case DOWN:
+                    person1.move(0, 5);
+                    break;
+                default:
+                    break;
+            }
+        }
         person1.draw();
-        if (showInfo){
-            person1.displayInfo(this);
-        } else {
-            
-        }
-    }
-    public void mousePressed(){
-        if (person1.isClicked(mouseX, mouseY))
-            showInfo = !showInfo;
-        else {
-            showInfo = false;
-        }
     }
 }
