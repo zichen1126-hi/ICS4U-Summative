@@ -8,7 +8,7 @@ package ics4u_summative;
  *
  * @author student
  */
-public class ProcessingExample {
+public class Main {
 
     /**
      * @param args the command line arguments

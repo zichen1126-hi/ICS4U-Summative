@@ -10,16 +10,22 @@ import processing.core.PApplet;
  */
 public class MySketch extends PApplet{
     private Character person1;
+    private Background field;
+    private Background meet;
+    private Background currBackground;
     private boolean showInfo;
     private String userInput = "";
     private int stage = 1;
     public void settings(){
-        size(400,400);
+        field = new Background(this, "images/background1.png");
+        meet = new Background(this, "images/background2.png");
+        currBackground = field;
+        size(currBackground.width,currBackground.height);
     }
     public void setup(){
-        background(100,100,100);
+        background(100);
         textSize(20);
-        person1 = new Character(this, 100, 200, "Mr Loo", 99, "images/person.png");
+        person1 = new Character(this, 750, 800, "Mr Loo", 99, "images/Cowherd.png");
     }
     public void draw(){
         background(100);
@@ -31,16 +37,20 @@ public class MySketch extends PApplet{
                 case RIGHT:
                     person1.move(5, 0);
                     break;
-                case UP:
-                    person1.move(0, -5);
-                    break;
-                case DOWN:
-                    person1.move(0, 5);
-                    break;
                 default:
                     break;
             }
         }
+        if (person1.x < 10 && currBackground == field){
+            currBackground = meet;
+            surface.setSize(currBackground.width,currBackground.height);
+            person1.x = 600;
+            person1.y = 600;
+        }
+        if (person1.x <= 400 && currBackground == meet){
+            person1.x = 400;
+        }
+        currBackground.draw();
         person1.draw();
     }
 }

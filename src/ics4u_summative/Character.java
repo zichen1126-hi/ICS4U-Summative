@@ -14,9 +14,9 @@ public class Character {
     private PApplet app;
     private PImage image;
     private String name;
-    private final String DEFAULTNAME = "Name";
+    private static final String DEFAULTNAME = "Name";
     private int age;
-    private final int DEFAULTAGE = 0;
+    private static final int DEFAULTAGE = 0;
     public Character(PApplet p, int x, int y, String name, int age, String imagePath){
         this.app = p;
         this.x = x;
@@ -25,12 +25,8 @@ public class Character {
         this.age = age;
         this.image = app.loadImage(imagePath);
     }
-    public Character(PApplet p){
-        this.app = p;
-        this.x = 0;
-        this.y = 0;
-        this.name = DEFAULTNAME;
-        this.age = DEFAULTAGE;
+    public Character(PApplet p, String imagePath){
+        this(p, 0, 0, DEFAULTNAME, DEFAULTAGE, imagePath);
     }
     public String getName(){
         return name;
