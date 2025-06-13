@@ -50,6 +50,10 @@ public class MySketch extends PApplet{
         if (person1.x <= 400 && currBackground == meet){
             person1.x = 400;
         }
+        if (person1.x <= 300 && currBackground == meet){
+            fill(0);
+            text("I love you", 300, 600);
+        }
         currBackground.draw();
         person1.draw();
     }
