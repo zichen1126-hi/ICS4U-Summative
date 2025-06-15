@@ -8,8 +8,10 @@ import processing.core.PApplet;
  *
  * @author student
  */
-public class MySketch extends PApplet{
-    private Character person1;
+public class MainSketch extends PApplet{
+    private Character person1, person2;
+    private boolean hideCowherd = false;
+    private boolean hideWeaverGirl = true;
     private Background field;
     private Background meet;
     private Background currBackground;
@@ -25,7 +27,9 @@ public class MySketch extends PApplet{
     public void setup(){
         background(100);
         textSize(20);
-        person1 = new Character(this, 750, 800, "Mr Loo", 99, "images/Cowherd.png");
+        person1 = new Character(this, 750, 800, "Cowherd", 30, "images/Cowherd.png");
+        person2 = new Character(this, 750, 800, "Weaver Girl", 30, "images/Cowherd.png");
+        
     }
     public void draw(){
         background(100);
@@ -41,20 +45,25 @@ public class MySketch extends PApplet{
                     break;
             }
         }
-        if (person1.x < 10 && currBackground == field){
+        //if the character reaches the left edge of the screen
+        if (person1.characterData.x < 10 && currBackground == field){
             currBackground = meet;
             surface.setSize(currBackground.width,currBackground.height);
-            person1.x = 600;
-            person1.y = 600;
+            person1.characterData.x = 600;
+            person1.characterData.y = 600;
         }
-        if (person1.x <= 400 && currBackground == meet){
-            person1.x = 400;
-        }
-        if (person1.x <= 300 && currBackground == meet){
-            fill(0);
-            text("I love you", 300, 600);
+        //if the character reaches x = 400 and the background is meet
+        if (person1.characterData.x <= 400 && currBackground == meet){
+            person1.characterData.x = 400;
         }
         currBackground.draw();
-        person1.draw();
+        if (currBackground == meet){
+            fill(0);
+            text("I love you, will you marry me?", 300, 600);
+        }
+        if (!hideCowherd)
+            person1.draw();
+        if (!hideWeaverGirl)
+            person2.draw();
     }
 }

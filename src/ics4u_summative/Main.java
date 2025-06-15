@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MySketch.main("ics4u_summative.MySketch");
+        MainSketch.main("ics4u_summative.MainSketch");
     }
     
 }

@@ -4,30 +4,39 @@
  */
 package ics4u_summative;
 import processing.core.PApplet;
-import processing.core.PImage;
 /**
  *
  * @author student
  */
 public class Character {
-    public int x, y;
-    private PApplet app;
-    private PImage image;
+    public BasicData characterData;
     private String name;
     private static final String DEFAULTNAME = "Name";
     private int age;
     private static final int DEFAULTAGE = 0;
+    /**
+     * Constructor Method for class Character
+     * @param p the PApplet
+     * @param x the x coord for the starting location for the character
+     * @param y the y coord for the starting location for the character
+     * @param name the name of the character
+     * @param age the age of the character
+     * @param imagePath the image path to the image of the character
+     */
     public Character(PApplet p, int x, int y, String name, int age, String imagePath){
-        this.app = p;
-        this.x = x;
-        this.y = y;
+        characterData = new BasicData(x, y, imagePath, p);
         this.name = name;
         this.age = age;
-        this.image = app.loadImage(imagePath);
     }
+    /**
+     * A default version of the constructor
+     * @param p the PApplet
+     * @param imagePath the image path to the image of the character
+     */
     public Character(PApplet p, String imagePath){
         this(p, 0, 0, DEFAULTNAME, DEFAULTAGE, imagePath);
     }
+    //Getter and setter methods for the variables
     public String getName(){
         return name;
     }
@@ -40,19 +49,13 @@ public class Character {
     public void setAge(int age){
         this.age = age;
     }
+    //Draw method for the characters
     public void draw(){
-        app.image(image, x, y);
+        characterData.app.image(characterData.getImage(), characterData.x, characterData.y);
     }
-    public boolean isCollidingWith(Character other){
-        int centerX = x + (image.pixelWidth / 2);
-        int centerY = y + (image.pixelHeight / 2);
-        int otherCenterX = other.x + (image.pixelWidth / 2);
-        int otherCenterY = other.y + (image.pixelHeight / 2);
-        float d = PApplet.dist(otherCenterX, otherCenterY, centerX, centerY);
-        return d < 32;
-    }
+    //Move method for the characters
     public void move(int dx, int dy){
-        x += dx;
-        y += dy;
+        characterData.x += dx;
+        characterData.y += dy;
     }
 }

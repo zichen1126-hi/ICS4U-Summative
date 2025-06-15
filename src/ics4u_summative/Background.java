@@ -12,31 +12,39 @@ import processing.core.PImage;
  * @author ziche
  */
 public class Background {
-    public int x, y;
+    public BasicData backgroundData;
     public int height, width;
-    private PApplet app;
-    private PImage image;
     private String place;
     private static final String DEFAULTPLACE = "Place";
+    /**
+     * Constructor Method for class Background
+     * @param app the PApplet
+     * @param imagePath the path of the background's image
+     * @param place what place the background is supposed to represent
+     */
     public Background(PApplet app, String imagePath, String place){
-        this.x = 0;
-        this.y = 0;
-        this.app = app;
-        this.image = app.loadImage(imagePath);
+        backgroundData = new BasicData(0, 0, imagePath, app);
         this.place = place;
-        this.height = image.pixelHeight;
-        this.width = image.pixelWidth;
+        this.height = backgroundData.getImage().pixelHeight;
+        this.width = backgroundData.getImage().pixelWidth;
     }
+    /**
+     * A default version of the constructor
+     * @param app the PApplet
+     * @param imagePath the path of the background's image
+     */
     public Background(PApplet app, String imagePath){
         this(app, imagePath, DEFAULTPLACE);
     }
+    //Getter and setter methods for the place variable
     public String getPlace(){
         return place;
     }
     public void setPlace(String place){
         this.place = place;
     }
+    //Draw method for the background
     public void draw(){
-        app.image(image, x, y);
+        backgroundData.app.image(backgroundData.getImage(), backgroundData.x, backgroundData.y);
     }
 }
